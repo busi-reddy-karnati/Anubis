@@ -1,13 +1,20 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useStyles} from './SubmissionTest.styles';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import {Button} from '@material-ui/core';
+import SubmissionTestExpanded from '../SubmissionTestExpanded/SubmissionTestExpanded';
 
 
 export default function SubmissionTest({test}) {
   const classes = useStyles();
+  const [expanded, setExpanded] = useState(false);
+  const toggleExpanded = () => {
+    setExpanded(!expanded);
+  };
+
   return (
     <Box
       className={classes.root}
@@ -34,8 +41,14 @@ export default function SubmissionTest({test}) {
         </Typography>
       </Box>
       <Typography className={classes.expand}>
-              Expand
+        <Button
+          onClick={toggleExpanded}
+        >
+          Expand
+        </Button>
       </Typography>
+      {expanded && <SubmissionTestExpanded/>
+      }
     </Box>
   );
 }
